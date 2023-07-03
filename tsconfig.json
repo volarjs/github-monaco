@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "moduleResolution": "node",
+        "module": "esnext",
+        "target": "esnext",
+        "declaration": true,
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true
+    },
+    "exclude": ["out", "dist"]
+}

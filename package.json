@@ -1,0 +1,61 @@
+{
+  "name": "github-monaco",
+  "version": "0.0.1",
+  "description": "Volar Monaco support for GitHub",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/lib/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./volar.worker": {
+      "import": "./dist/worker/volar.worker.js",
+      "types": "./dist/volar.worker.d.ts"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/volarjs/github-volar.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/volarjs/github-volar/issues"
+  },
+  "homepage": "https://github.com/volarjs/github-volar#readme",
+  "dependencies": {
+    "onigasm": "^2.2.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.3.3",
+    "@volar/cdn": "1.8.0",
+    "@volar/language-service": "1.8.0",
+    "@volar/monaco": "1.8.0",
+    "@volar/typescript": "1.8.0",
+    "@vue/reactivity": "^3.3.4",
+    "@vueuse/core": "^10.2.1",
+    "esbuild": "^0.18.11",
+    "monaco-editor-core": "^0.39.0",
+    "monaco-editor-textmate": "^4.0.0",
+    "monaco-textmate": "^3.0.1",
+    "monaco-volar": "^0.4.0",
+    "path-browserify": "^1.0.1",
+    "typescript": "^5.1.6",
+    "vite": "^4.3.9",
+    "vite-plugin-rewrite-all": "^1.0.1",
+    "volar-service-typescript": "0.0.9",
+    "vscode-uri": "^3.0.7"
+  },
+  "scripts": {
+    "build:lib": "vite build -c ./scripts/vite.lib.config.ts",
+    "build:worker": "vite build -c ./scripts/vite.worker.config.ts",
+    "build:dts": "tsc -p ./tsconfig.build.json",
+    "build": "pnpm build:lib && pnpm build:worker && pnpm build:dts",
+    "build:demo": "vite build -c ./vite.config.ts",
+    "dev": "vite dev --force"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ]
+}
