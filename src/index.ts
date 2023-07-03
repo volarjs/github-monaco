@@ -2,24 +2,28 @@ import * as monaco from "monaco-editor-core";
 import { loadGrammars, loadTheme } from "monaco-volar";
 import { createSys, findTsConfig, parseTsConfig } from "./utils";
 import { loadOnigasm, setupMonacoEnv } from "./env";
-import { computed } from "@vue/reactivity";
-import { useBrowserLocation } from "@vueuse/core";
 import * as cdn from "@volar/cdn";
 
-const baseUrl = '/github-monaco';
-const owner = location.pathname.substring(baseUrl.length).split('/')[1];
-const repo = location.pathname.substring(baseUrl.length).split('/')[2];
-const branch = location.pathname.substring(baseUrl.length).split('/')[3];
 const rootPath = '/workspace';
-const _location = useBrowserLocation();
-const fileName = computed(() => rootPath + '/' + _location.value.pathname!.substring(baseUrl.length).split('/').slice(4).join('/'));
+// const baseUrl = '/github-monaco';
+// const owner = location.pathname.substring(baseUrl.length).split('/')[1];
+// const repo = location.pathname.substring(baseUrl.length).split('/')[2];
+// const branch = location.pathname.substring(baseUrl.length).split('/')[3];
+// const _location = useBrowserLocation();
+// const fileName = computed(() => rootPath + '/' + _location.value.pathname!.substring(baseUrl.length).split('/').slice(4).join('/'));
+
+const params = new URLSearchParams(location.search);
+const owner = params.get('owner')!;
+const repo = params.get('repo')!;
+const branch = params.get('branch')!;
+const fileName = rootPath + '/' + params.get('file')!;
 
 (async () => {
 
   const uriResolver = cdn.createGitHubUriResolver(rootPath, owner, repo, branch);
   const fs = cdn.createGitHubFs(owner, repo, branch);
   const sys = createSys(uriResolver, fs);
-  const tsconfig = await findTsConfig(fileName.value.substring(0, fileName.value.lastIndexOf('/')), sys);
+  const tsconfig = await findTsConfig(fileName.substring(0, fileName.lastIndexOf('/')), sys);
   const parsed = tsconfig ? await parseTsConfig(tsconfig, sys) : undefined;
 
   setupMonacoEnv({
@@ -31,7 +35,7 @@ const fileName = computed(() => rootPath + '/' + _location.value.pathname!.subst
   });
 
   const [, theme] = await Promise.all([loadOnigasm(), loadTheme(monaco.editor)]);
-  const uri = uriResolver.fileNameToUri(fileName.value)!;
+  const uri = uriResolver.fileNameToUri(fileName)!;
   const text = await fs.readFile(uri);
   const model = monaco.editor.createModel(
     text!,
