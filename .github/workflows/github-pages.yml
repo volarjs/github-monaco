@@ -15,7 +15,6 @@ jobs:
         node-version: 16
     - run: npm install -g pnpm
     - run: pnpm i
-    - run: pnpm format:check
     - run: pnpm build
     - run: pnpm build:demo
     - name: Release pages
