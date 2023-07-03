@@ -16,7 +16,7 @@ const params = new URLSearchParams(location.search);
 const owner = params.get('owner')!;
 const repo = params.get('repo')!;
 const branch = params.get('branch')!;
-const fileName = rootPath + '/' + params.get('file')!;
+const fileName = rootPath + params.get('file')!;
 
 (async () => {
 
