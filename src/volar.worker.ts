@@ -1,6 +1,7 @@
 import * as cdn from "@volar/cdn";
 import { createLanguageHost, createLanguageService, createServiceEnvironment } from "@volar/monaco/worker";
 import type * as monaco from "monaco-editor-core";
+// @ts-expect-error
 import * as worker from "monaco-editor-core/esm/vs/editor/editor.worker";
 import * as ts from "typescript";
 import createTsService from "volar-service-typescript";

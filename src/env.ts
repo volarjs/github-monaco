@@ -1,6 +1,9 @@
+// @ts-expect-error
 import editorWorker from "monaco-editor-core/esm/vs/editor/editor.worker?worker";
+// @ts-expect-error
 import volarWorker from "./volar.worker?worker";
 import * as onigasm from "onigasm";
+// @ts-expect-error
 import onigasmWasm from "onigasm/lib/onigasm.wasm?url";
 
 import type { LanguageService } from "@volar/language-service";

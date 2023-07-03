@@ -6,12 +6,13 @@ import { computed } from "@vue/reactivity";
 import { useBrowserLocation } from "@vueuse/core";
 import * as cdn from "@volar/cdn";
 
-const owner = location.pathname.split('/')[1];
-const repo = location.pathname.split('/')[2];
-const branch = location.pathname.split('/')[3];
+const baseUrl = '/github-monaco';
+const owner = location.pathname.substring(baseUrl.length).split('/')[1];
+const repo = location.pathname.substring(baseUrl.length).split('/')[2];
+const branch = location.pathname.substring(baseUrl.length).split('/')[3];
 const rootPath = '/workspace';
 const _location = useBrowserLocation();
-const fileName = computed(() => rootPath + '/' + _location.value.pathname!.split('/').slice(4).join('/'));
+const fileName = computed(() => rootPath + '/' + _location.value.pathname!.substring(baseUrl.length).split('/').slice(4).join('/'));
 
 (async () => {
 

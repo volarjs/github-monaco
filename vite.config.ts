@@ -3,6 +3,7 @@ import * as path from "path";
 import pluginRewriteAll from "vite-plugin-rewrite-all";
 
 export default defineConfig({
+  base: '/github-monaco/',
   optimizeDeps: {
     include: ["path-browserify"],
   },
